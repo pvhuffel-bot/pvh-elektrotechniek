@@ -6,31 +6,37 @@ const inspectieOnderwerpen = [
     titel: "NEN 1010 — Opleveringsinspectie",
     desc: "Inspectie van nieuwe of aangepaste elektrotechnische installaties. Visuele controle, metingen en beproeving conform NEN 1010.",
     punten: ["Isolatieweerstand", "Aarding & potentiaalvereffening", "Beveiligingsautomaten", "Aansluitingen & bedrading"],
+    img: "https://images.pexels.com/photos/28950842/pexels-photo-28950842.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
   {
     titel: "NEN 3140 — Periodieke keuring",
     desc: "Veilig gebruik en beheer van bestaande laagspanningsinstallaties. Periodieke inspectie met rapportage van bevindingen en meetwaarden.",
     punten: ["Visuele controle", "Metingen & beproeving", "Rapportage met hersteladvies", "Geschikt voor VvE & vastgoed"],
+    img: "https://images.pexels.com/photos/14319099/pexels-photo-14319099.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
   {
     titel: "NTA 8220 — Brandrisico",
-    desc: "Beoordeling van elektrisch brandrisico. Scopus 10 volgens de InstallQ-methode. Incl. thermografie waar nodig.",
+    desc: "Beoordeling van elektrisch brandrisico. Scope 10 volgens de InstallQ-methode. Incl. thermografie waar nodig.",
     punten: ["Overbelasting & verbindingen", "Componenten & verdeelinrichtingen", "Thermografie", "Vaste installaties & machines"],
+    img: "https://images.pexels.com/photos/13172736/pexels-photo-13172736.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
   {
     titel: "NEN 1078 — Gasinstallatie",
     desc: "Inspectie van gasinstallaties, o.a. bij woningsplitsing. Vaak gecombineerd met NEN 1010 en NEN 3140.",
     punten: ["Gasinstallatie conform NEN 1078", "Bruikbaar voor vergunningtraject", "Onafhankelijke rapportage"],
+    img: "https://images.pexels.com/photos/32497160/pexels-photo-32497160.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
   {
     titel: "Keuring arbeidsmiddelen",
     desc: "Periodieke keuring van elektrisch gereedschap, machines, kabelhaspels, kantoor- en keukenapparatuur, besturingsinstallaties, ladders en rolsteigers.",
     punten: ["Elektrisch gereedschap", "Machines & kabelhaspels", "Kantoor- & keukenapparatuur", "Ladders, trappen & rolsteigers"],
+    img: "https://images.pexels.com/photos/5090652/pexels-photo-5090652.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
   {
     titel: "Woningsplitsing",
     desc: "Inspecties voor woningsplitsing combineren NEN 1010 (elektra), NEN 3140 (bestaand gebruik) en NEN 1078 (gas). Rapportage bruikbaar voor gemeentelijke vergunningtrajecten.",
     punten: ["NEN 1010 + NEN 3140 + NEN 1078", "Vastlegging van afwijkingen", "Concrete hersteladviezen"],
+    img: "https://images.pexels.com/photos/31701039/pexels-photo-31701039.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
 ];
 
@@ -46,8 +52,16 @@ const erkenningsnummers = [
 export default function Inspecties() {
   return (
     <div className="flex flex-col">
-      <section className="bg-black py-16 md:py-20 border-b border-primary/20">
-        <div className="container">
+      <section className="bg-black py-16 md:py-20 border-b border-primary/20 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.pexels.com/photos/14319099/pexels-photo-14319099.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            alt="Elektrische inspectie"
+            className="w-full h-full object-cover opacity-25"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40" />
+        </div>
+        <div className="container relative">
           <div className="inline-block bg-primary text-black text-sm font-semibold px-3 py-1 rounded mb-4">
             InstallQ-erkend
           </div>
@@ -97,28 +111,39 @@ export default function Inspecties() {
         </div>
       </section>
 
-      {/* Inspectieonderwerpen */}
+      {/* Inspectieonderwerpen met foto's */}
       <section className="py-16 bg-background">
         <div className="container max-w-4xl">
           <h2 className="text-2xl md:text-3xl font-bold text-white">
             Inspectieonderwerpen
           </h2>
-          <div className="mt-8 space-y-5">
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
             {inspectieOnderwerpen.map((item) => (
               <div
                 key={item.titel}
-                className="border border-border rounded bg-card p-6"
+                className="border border-border rounded bg-card overflow-hidden hover:border-primary/50 transition-colors"
               >
-                <h3 className="text-xl font-semibold text-white">{item.titel}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{item.desc}</p>
-                <ul className="mt-4 grid sm:grid-cols-2 gap-2">
-                  {item.punten.map((pt) => (
-                    <li key={pt} className="flex items-start gap-2 text-sm text-white/70">
-                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={item.img}
+                    alt={item.titel}
+                    loading="lazy"
+                    className="w-full h-full object-cover opacity-75"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-semibold text-white">{item.titel}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{item.desc}</p>
+                  <ul className="mt-4 space-y-1.5">
+                    {item.punten.map((pt) => (
+                      <li key={pt} className="flex items-start gap-2 text-sm text-white/70">
+                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
